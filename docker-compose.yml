@@ -4,7 +4,7 @@ services:
     build:
       context: .
     environment:
-      DB_CONNECTIONSTRING: "Server=mssql;Database=PrynSpec;User=SA;Password=Senha@1234"
+      DB_CONNECTIONSTRING: "Server=mssql;Database=StackOverflow;User=sa;Password=1Secure*Password1;"
     ports:
       - 5000:80
     networks:
@@ -15,8 +15,8 @@ services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Senha@1234"
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
     networks: 
       - stackoverflow-network
     volumes:

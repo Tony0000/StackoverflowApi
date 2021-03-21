@@ -23,11 +23,13 @@ namespace Api
             {
                 var ctx = services.GetRequiredService<OverflowDbContext>();
                 ctx.Database.Migrate();
+                DataSeeder.Initialize(ctx);
             }
             catch (Exception e)
             {
                 Console.WriteLine("An error occurred while creating tables: "+ e.Message);
             }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
