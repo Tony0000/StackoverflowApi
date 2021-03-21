@@ -9,7 +9,7 @@ namespace Infrastructure.Persistence
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
         IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "OverflowDb";
+        private const string ConnectionStringName = "DefaultConnection";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
         public TContext CreateDbContext(string[] args)
         {

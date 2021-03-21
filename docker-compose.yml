@@ -1,9 +1,10 @@
 version: "3.8"
 services:
   api:
+    build:
+      context: .
     environment:
       DB_CONNECTIONSTRING: "Server=mssql;Database=PrynSpec;User=SA;Password=Senha@1234"
-      ASPNETCORE_ENVIRONMENT: "Development"
     ports:
       - 5000:80
     networks:
