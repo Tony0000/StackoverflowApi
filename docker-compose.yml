@@ -4,27 +4,26 @@ services:
     build:
       context: .
     environment:
-      DB_CONNECTIONSTRING: "Server=mssql;Database=StackOverflow;User=sa;Password=1Secure*Password1;"
+      DB_CONNECTIONSTRING: "User ID=postgres;Password=1Secure*Password1;Server=postgres;Port=5432;Database=Overflow.Db;Integrated Security=true;Pooling=true;"
     ports:
       - 5000:80
     networks:
       - stackoverflow-network
     depends_on:
-      - mssql
+      - postgres
 
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+  postgres:
+    image: postgres:12-alpine
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
+      - POSTGRES_PASSWORD=1Secure*Password1
     networks: 
       - stackoverflow-network
     volumes:
-      - mssql-data:/var/opt/mssql
+      - postgres-data:/var/opt/postgres
       
 networks:
   stackoverflow-network:
     driver: bridge
 
 volumes:
-  mssql-data: 
+  postgres-data: 

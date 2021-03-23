@@ -11,16 +11,14 @@ namespace Infrastructure
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTIONSTRING");
-            Console.WriteLine($"From env: {connectionString}");
             if (string.IsNullOrEmpty(connectionString))
             {
                 connectionString = configuration.GetConnectionString("DefaultConnection");
             }
-
-            Console.WriteLine($"From project: {connectionString}");
-
-            services.AddDbContext<OverflowDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<OverflowDbContext>(options =>
+                    options.UseNpgsql(connectionString));
 
             services.AddScoped<IOverflowDbContext>(provider => provider.GetService<OverflowDbContext>());
 
